@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" referrerpolicy="no-referrer" />
+    
+    <title>Account Page</title>
+</head>
+<body>
+   
+   <div class="min-h-screen bg-gray-500">
+    <div class="p-4 w-full flex justify-center items-center bg-gray-500 text-blue-200">
+        <div class="container flex flex-col gap-4 bg-gray-700 p-12 rounded-2xl content-center items-center max-w-4/5">
+            <div class="container flex flex-col gap-4 bg-gray-700 p-4 rounded-2xl content-center items-center max-w-xl" id="name">
+                <div class="font-bold text-4xl">Welcome back</div>
+            </div>
+            <img src="" id='picture' class="h-36 w-36 object-cover rounded-full opacity-75 border-2 border-black"></img>
+            <div class="information flex gap-4 justify-start">
+                <i id="email" class="fas fa-envelope-square text-3xl p-2"></i>
+                <i id="number" class="fas fa-phone-square text-3xl p-2"></i>
+            </div>
+            <button class="bg-yellow-400 text-black p-4 text-xl rounded-2xl font-bold w-52 hover:bg-yellow-200 cursor-pointer duration-150" id="btn" type="button">Write something!</button>
+        </div>
+    </div>
+    <div class="  flex justify-center flex-col gap-4 items-center bg-gray-500 text-blue-200" id="timeline">
+   </div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="module">
+    import { login } from './controller.js'
+    import {registerUser2} from './controller.js'
+    const name = document.querySelector('#name')
+    const picture = document.querySelector('#picutre')
+    const email = document.querySelector('#email')
+    const number = document.querySelector('#number')
+    const articles = document.querySelector('.articles')
+    const btn = document.querySelector('#btn')
+    const posts = document.querySelector('#timeline')
+    var currentUser;
+    init();
+        function init(){
+            if(localStorage.currentUSer){
+                currentUser = JSON.parse(localStorage.currentUSer)
+            } else {
+                location.href = './login.html'
+            }
+        }
+
+
+        name.insertAdjacentHTML('beforeend', `<div class="font-bold text-4xl text-yellow-400">${currentUser.username}</div>`)
+        document.querySelector('#picture').src = currentUser.avatar
+        
+        email.addEventListener('click', function(){
+            Swal.fire(currentUser.email)
+        })
+        number.addEventListener('click', function(){
+            Swal.fire(currentUser.number)
+        })
+    
+    btn.addEventListener('click', function(){
+        location.href = './article.html'
+    })
+
+
+
+var lol;
+lol = JSON.parse(localStorage.users2)
+
+for (let i = 0; i < Object.keys(lol).length; i++){
+
+
+
+
+    posts.insertAdjacentHTML('afterbegin', `
+    <div class="h-full w-full container flex flex-col gap-4 bg-gray-700 p-4 rounded-2xl  max-w-4/5" id="timeline">
+    
+            <div>
+                <div class="text-3xl text-red-400 text-bold p-2">${lol[i].title}</div>
+                <div class="date text-white p-2">${lol[i].date}</div>
+                <div class="h-36 flex gap-4">
+                    <img style="overflow: hidden;" class="h-36 w-36 object-cover rounded-2xl  opacity-75 border-2 border-black" src="${lol[i].pic}" alt="">
+                    <div class="text-2xl">${lol[i].text.slice(0, 130)} ...</div>
+                </div>
+            </div>
+            <button class="bg-green-200 text-black p-2 text-sm rounded-2xl font-bold w-16 hover:bg-yellow-200 cursor-pointer duration-150 btn" id="${i}" type="button" >Read</button>
+        </div>
+    `)
+}
+document.addEventListener('click', function(e){
+    if (e.target.id !== ""){
+        console.log(e.target.id)
+        localStorage.setItem('read', e.target.id)
+        location.href = './comment.html'
+    }
+})
+
+</script>
+</html>

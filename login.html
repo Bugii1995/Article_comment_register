@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" referrerpolicy="no-referrer" />
+  
+    <title>Login</title>
+</head>
+<body>
+    <div>
+        <div class="h-screen w-full flex justify-center items-center bg-gray-500 text-blue-200">
+            <div class="container flex flex-col gap-4 bg-gray-700 p-12 rounded-2xl content-center items-center max-w-xl">
+                <div class="font-bold text-4xl">Log in</div>
+                <div>Please enter your email and password</div>
+                <label for="email">Your email</label>
+                <input class="p-2 rounded-2xl text-blue-900" type='text' placeholder="Email" name="email" id="email" required>
+    
+                <label for="password">Password</label>
+                <input class="p-2 rounded-2xl text-blue-900" type="password" placeholder="Password" name="password" id="password" required>
+    
+                
+    
+                <div class="flex flex-col gap-16">
+                    <button class="p-2 w-32 rounded-2xl bg-gray-600 hover:bg-gray-900 hover:text-white border-2 duration-150" type="button" class="login" id="#login">Log in</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script type='module'>
+        const email = document.querySelector('#email');
+        const password = document.querySelector('#password');
+
+        import { login } from './controller.js'
+        const loginbtn = document.getElementById('#login')
+
+        loginbtn.addEventListener('click', e => {
+            login({email: email.value, password: password.value})
+        })
+
+    </script>
+    
+</body>
+</html>

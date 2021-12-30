@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" referrerpolicy="no-referrer" />
+    <title>Write Article</title>
+</head>
+<body>
+    <div class="h-screen w-full flex flex-col justify-center items-center bg-gray-500 text-blue-200 gap-4" p-4 id='Article'>
+        <div class="container flex flex-col gap-4 bg-gray-700 p-12 rounded-2xl max-w-4/5">
+            <div class="font-bold text-red-400 text-4xl">Got something on your mind?</div>
+            <div class="text-3xl text-bold text-white">Enter your title here:</div>
+            <textarea class="bg-gray-400 p-4 text-2xl text-blue-900 rounded-2xl" name="title" cols="30" rows="1" id="input-title"></textarea>
+            <div class="text-3xl text-bold text-white">Enter your text:</div>
+            <textarea class="bg-gray-400 p-4 text-2xl text-blue-900 rounded-2xl" name="text" cols="30" rows="14" id="input-text"></textarea>
+            <div class="text-3xl text-bold text-white">Enter article picture:</div>
+            <textarea class="bg-gray-400 p-4 text-2xl text-blue-900 rounded-2xl" name="text" cols="30" rows="1" id="input-pic"></textarea>
+            <button class="bg-yellow-400 text-black p-4 text-xl rounded-2xl font-bold w-32 hover:bg-yellow-200 cursor-pointer duration-150" id="btn" type="button">Publish</button>
+        </div>
+    </div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="module">
+var current = new Date();
+    import { registerUser2 } from './controller.js'
+    import { login } from './controller.js'
+    import { User } from './module.js'
+    
+    var currentUser;
+    var x = Math.random().toString().split('.')[1];
+    init();
+        function init(){
+            if(localStorage.currentUSer){
+                currentUser = JSON.parse(localStorage.currentUSer)
+            } else {
+                location.href = './login.html'
+            }
+        }
+const title = document.querySelector('#input-title')
+const text = document.querySelector('#input-text')
+const pic = document.querySelector('#input-pic')
+const btn = document.querySelector('#btn')
+
+btn.addEventListener('click', event => {
+    event.preventDefault()
+    if(title.value !== "" && text.value !== "") {
+        registerUser2({
+            title: title.value,
+            text: text.value,
+            pic: pic.value,
+            date: current,
+            person: currentUser.username,
+            id: x
+        })
+        
+        location.href = './account.html'
+    } else {
+        Swal.fire("Not published!")
+    }
+})
+
+</script>
+</html>

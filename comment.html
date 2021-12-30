@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" referrerpolicy="no-referrer" />
+    <title>Article</title>
+</head>
+<body>
+    <div class="min-h-screen bg-gray-500">
+    <div class=" flex flex-col justify-center items-center bg-gray-500 text-blue-200 gap-4 p-4" id='article'>
+        
+    </div>
+    <!--comment section-->
+    <div class="w-full flex flex-col justify-center items-center bg-gray-500 text-blue-200 gap-4 p-4" id='main'>
+        <div class="container flex flex-col gap-4 bg-gray-700 p-12 rounded-2xl max-w-4/5">
+            <div class="font-bold text-red-400 text-4xl">Got something to say?</div>
+            <textarea class="bg-gray-400 p-4 text-2xl text-blue-900 rounded-2xl" name="comment" cols="30" rows="6" id="input"></textarea>
+
+           <div class="flex justify-between">
+            <button class="bg-yellow-400 text-black p-4 text-xl rounded-2xl font-bold w-32 hover:bg-yellow-200 cursor-pointer duration-150" id="btn" type="button">Comment</button>
+            <button class="bg-yellow-400 text-black p-4 text-xl rounded-2xl font-bold w-32 hover:bg-yellow-200 cursor-pointer duration-150" id="back" type="button">Go back</button>
+           </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="module">
+    const read = document.querySelector('#article')
+    const input = document.querySelector('#input');
+    const btn = document.querySelector('#btn');
+    const main = document.querySelector('#main');
+    const back = document.querySelector('#back')
+    var x;
+    var counter = 0;
+    var current = new Date();
+    import { login } from './controller.js'
+    import { registerUser2 } from './controller.js'
+    var arrayOfKeys = Object.keys(localStorage);
+    var currentUser;
+    init();
+        function init(){
+            if(localStorage.currentUSer){
+                currentUser = JSON.parse(localStorage.currentUSer)
+            } else {
+                location.href = './login.html'
+            }
+
+
+        }
+    
+    let index;
+    index = JSON.parse(localStorage.read);
+
+    let interst;
+
+    interst = JSON.parse(localStorage.users2)
+
+    
+    read.insertAdjacentHTML('afterbegin', `
+    <div class="container flex flex-col gap-4 bg-gray-700 p-12 rounded-2xl max-w-4/5">
+            <div class="text-6xl text-blue-400 font-bold">${interst[index].title}</div>
+            <div class="text-4xl text-white italic font-bold">By ${interst[index].person}</div>
+            <div class="date text-white p-2">${interst[index].date}</div>
+            <img class="h-96 w-full object-cover rounded-2xl  opacity-75 border-2 border-black" src="${interst[index].pic}" alt="">
+            <div class="text-2xl  p-4 leading-loose">${interst[index].text}</div>
+        </div>
+    `)
+    back.addEventListener('click', function(){
+        location.href = './account.html'
+    })
+
+    btn.addEventListener('click', function(){
+        x = `
+        <div class="container flex flex-col gap-4 bg-gray-700 p-12 rounded-2xl max-w-4/5 text-2xl">
+            <div class="text-red-400">${currentUser.username}:</div>
+            <div>${input.value}</div>
+            <div class="text-lg text-white">${current}</div>
+        </div>
+        `
+        counter++
+        main.insertAdjacentHTML('afterbegin', x)
+        localStorage.setItem(`${index}.${counter}`, `${x}`)
+        input.value = "";
+    })
+
+    for (let i = 0; i < arrayOfKeys.length ; i++){
+        
+        if (arrayOfKeys[i] * 1 > index && arrayOfKeys[i] * 1 < index + 1){
+            let j;
+            j = localStorage.getItem(`${arrayOfKeys[i]}`)
+            main.insertAdjacentHTML('afterbegin', j)
+        } 
+    }
+
+    localStorage.setItem(`${interst[index].id}`, `${x}`)
+
+
+
+    
+    
+
+</script>
+</html>
+

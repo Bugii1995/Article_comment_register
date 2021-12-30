@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" referrerpolicy="no-referrer" />
+    
+    <title>Registration Page</title>
+</head>
+<body>
+    <div>
+        <div class="h-screen w-full flex justify-center items-center bg-gray-500 text-blue-200">
+            <div class="container flex flex-col gap-4 bg-gray-700 p-12 rounded-2xl content-center items-center max-w-xl">
+                <div class="font-bold text-4xl">Register</div>
+                <div>Please fill out this forum to register</div>
+    
+                <label for="username">Your username</label>
+                <input class="p-2 rounded-2xl text-blue-900" type="text" placeholder="Name" name="usename" id="username" required>
+    
+                <label for="email">Your email</label>
+                <input class="p-2 rounded-2xl text-blue-900" type='text' placeholder="Email" name="email" id="email" required>
+    
+                <label for="number">Phone number</label>
+                <input class="p-2 rounded-2xl text-blue-900" type='number' placeholder="Phone number" name="number" id="number" required>
+
+                <label for="picture">Profile picture</label>
+                <input class="p-2 rounded-2xl text-blue-900" type='link' placeholder="Link" name="picture" id="picture" required>
+    
+                <label for="password">Password</label>
+                <input class="p-2 rounded-2xl text-blue-900" type="password" placeholder="Password" name="password" id="password" required>
+                
+                <label for="password">Retype Password</label>
+                <input class="p-2 rounded-2xl text-blue-900" type="password" placeholder="Password" name="password" id="password2" required>
+                
+    
+                <div class="flex flex-col gap-16">
+                    <button class="p-2 w-42 rounded-2xl bg-gray-600 hover:bg-gray-900 hover:text-white border-2 duration-150 " type="button" class="btn" id="#btn">Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script type='module' src="script.js"></script> <!--Make sure to inclusde module-->
+    
+</body>
+</html>
