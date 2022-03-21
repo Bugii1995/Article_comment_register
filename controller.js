@@ -26,7 +26,7 @@ export function registerUser2(obj){
     user2.register2(users2)
     localStorage.setItem('users2' , JSON.stringify(users2))
 }
-
+  mknk
 
 
 
