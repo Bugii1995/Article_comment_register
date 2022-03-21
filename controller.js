@@ -12,7 +12,7 @@ export function registerUser(obj){
     const user = new User(username , email , number , avatar , password);
     user.register(users)
     localStorage.setItem('users' , JSON.stringify(users))
-}
+nn.  
 
 export function registerUser2(obj){
     let users2;
